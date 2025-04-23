@@ -145,3 +145,8 @@ button[name="remove_from_cart"] {
 button[name="remove_from_cart"]:hover {
     background-color: #cc0000;
 }
+.total-products {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+}
