@@ -16,13 +16,21 @@
     </header>
     <main>
         <h2>Danh Sách Sản Phẩm</h2>
+        <!-- Hiển thị tổng số sản phẩm -->
+        <?php
+        $conn = new mysqli("localhost", "root", "", "petshop_db");
+        if ($conn->connect_error) {
+            die("Kết nối thất bại: " . $conn->connect_error);
+        }
+        $count_query = "SELECT COUNT(*) AS total FROM products";
+        $count_result = $conn->query($count_query);
+        $count_row = $count_result->fetch_assoc();
+        echo "<p class='total-products'>Tổng số sản phẩm: " . $count_row['total'] . "</p>";
+        ?>
         <div class="products">
             <?php
-            $conn = new mysqli("localhost", "root", "", "petshop_db");
-            if ($conn->connect_error) {
-                die("Kết nối thất bại: " . $conn->connect_error);
-            }
-            $result = $conn->query("SELECT * FROM products");
+            $query = "SELECT * FROM products";
+            $result = $conn->query($query);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<div class='product'>";
