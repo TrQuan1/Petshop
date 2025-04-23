@@ -45,5 +45,24 @@
     <footer>
         <p>© 2025 Cửa Hàng Phụ Kiện Thú Cưng</p>
     </footer>
+<div style="text-align: center; margin: 20px;">
+    <input type="text" id="searchInput" placeholder="Tìm sản phẩm..." onkeyup="searchProducts()" style="padding: 8px; width: 250px;">
+</div>
+<script>
+function searchProducts() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const products = document.getElementsByClassName("product-item");
+
+    for (let i = 0; i < products.length; i++) {
+        const name = products[i].innerText.toLowerCase();
+        if (name.includes(input)) {
+            products[i].style.display = "";
+        } else {
+            products[i].style.display = "none";
+        }
+    }
+}
+</script>
+
 </body>
 </html>
