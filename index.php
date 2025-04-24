@@ -12,26 +12,35 @@
         <nav>
             <a href="index.php">Trang Chủ</a>
             <a href="cart.php">Giỏ Hàng</a>
-            <a href="Feedback.php">Góp Ý</a> <!-- Thêm dòng này -->
+            <a href="Feedback.php">Góp Ý</a> <!-- ✅ Nút Góp ý mới -->
         </nav>
     </header>
 
     <main>
         <h2>Danh Sách Sản Phẩm</h2>
+
+        <!-- Hiển thị tổng số sản phẩm -->
+        <?php
+        $conn = new mysqli("localhost", "root", "", "petshop_db");
+        if ($conn->connect_error) {
+            die("Kết nối thất bại: " . $conn->connect_error);
+        }
+        $count_query = "SELECT COUNT(*) AS total FROM products";
+        $count_result = $conn->query($count_query);
+        $count_row = $count_result->fetch_assoc();
+        echo "<p class='total-products'>Tổng số sản phẩm: " . $count_row['total'] . "</p>";
+        ?>
+
         <div class="products">
             <?php
-            $conn = new mysqli("localhost", "root", "", "petshop_db");
-            if ($conn->connect_error) {
-                die("Kết nối thất bại: " . $conn->connect_error);
-            }
-
-            $result = $conn->query("SELECT * FROM products");
+            $query = "SELECT * FROM products";
+            $result = $conn->query($query);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<div class='product'>";
-                    echo "<a href='product.php?id=" . $row['id'] . "'><img src='" . $row['image'] . "' alt='" . $row['name'] . "'></a>";
-                    echo "<h3><a href='product.php?id=" . $row['id'] . "'>" . htmlspecialchars($row['name']) . "</a></h3>";
-                    echo "<p>Giá: " . number_format($row['price'], 0, ',', '.') . " đ</p>";
+                    echo "<a href='product.php?id=" . $row['id'] . "'><img src='images/" . $row['image'] . "' alt='" . $row['name'] . "'></a>";
+                    echo "<h3><a href='product.php?id=" . $row['id'] . "'>" . $row['name'] . "</a></h3>";
+                    echo "<p>Giá: " . number_format($row['price'], 0, ',', '.') . " VND</p>";
                     echo "<form action='cart.php' method='post'>";
                     echo "<input type='hidden' name='product_id' value='" . $row['id'] . "'>";
                     echo "<button type='submit' name='add_to_cart'>Thêm vào giỏ</button>";
@@ -41,7 +50,6 @@
             } else {
                 echo "<p>Chưa có sản phẩm nào!</p>";
             }
-
             $conn->close();
             ?>
         </div>
