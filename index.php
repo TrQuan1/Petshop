@@ -12,8 +12,10 @@
         <nav>
             <a href="index.php">Trang Chủ</a>
             <a href="cart.php">Giỏ Hàng</a>
+            <a href="Feedback.php">Góp Ý</a> <!-- ✅ Nút Góp ý mới -->
         </nav>
     </header>
+
     <main>
         <h2>Danh Sách Sản Phẩm</h2>
         <!-- Hiển thị tổng số sản phẩm -->
@@ -50,6 +52,7 @@
             ?>
         </div>
     </main>
+
     <footer>
         <p>© 2025 Cửa Hàng Phụ Kiện Thú Cưng</p>
     </footer>
