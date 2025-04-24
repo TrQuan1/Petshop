@@ -33,6 +33,12 @@
             <?php
             $query = "SELECT * FROM products";
             $result = $conn->query($query);
+            $conn = new mysqli("localhost", "root", "", "petshop_db");
+            if ($conn->connect_error) {
+                die("Kết nối thất bại: " . $conn->connect_error);
+            }
+
+            $result = $conn->query("SELECT * FROM products");
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<div class='product'>";
