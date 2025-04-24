@@ -16,6 +16,9 @@
     </header>
     <main>
         <h2>Danh Sách Sản Phẩm</h2>
+<p><a href="add_product.php" class="add-button">+ Thêm sản phẩm mới</a></p>
+
+
         <div class="products">
             <?php
             $conn = new mysqli("localhost", "root", "", "petshop_db");
